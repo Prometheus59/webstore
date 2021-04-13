@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import productImage from "../../Images/watch_test.jpeg";
+import productImage from "../../Images/2.jpg";
 
 const ProductPageStyle = styled.div`
   margin: 50px;
@@ -38,21 +38,25 @@ function ProductPage(props) {
   let name = state[0]?.name || "name";
   let price = state[0]?.price || "price";
   let quantity = state[0]?.price || "quantity";
-  // let description = state[0].description;
 
   console.log(id);
 
   return (
     <ProductPageStyle>
       <ImgContainer>
-        <img src={require(`../../Images/${id}.jpg`).default} />
+        <img src={productImage} />
       </ImgContainer>
       <div id="product-info">
-        <h2>{name}</h2>
-        <div>Price($): {price} </div>
-        <p>Quantity Left: {quantity}</p>
-        {/* <div>Description - {description} </div> */}
-        <button>Add to cart</button>
+        <h2>Popcorn</h2>
+        <div>Price($): 5 </div>
+        <p>Quantity Left: 12</p>
+        <div>
+          Description - Do you enjoy popped kernels? Then look no further than
+          our premium popcorn!
+        </div>
+        <button onClick={() => alert("Popcorn has been added to cart")}>
+          Add to cart
+        </button>
       </div>
       <div id="related-products">{/* Implement carousel here */}</div>
     </ProductPageStyle>

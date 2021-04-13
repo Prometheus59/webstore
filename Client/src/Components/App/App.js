@@ -46,7 +46,7 @@ const CountrySelection = styled.div`
 const BackgroundColor = styled.div`
   background-color: #403f4c;
   color: white;
-  min-height: 40em;
+  min-height: 60em;
 `;
 
 const Footer = styled.div``;
@@ -60,9 +60,9 @@ function App() {
             <li>
               <Link to="/landingpage">Home</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/product">Product</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/cart">Cart</Link>
             </li>

@@ -7,6 +7,13 @@ import img1 from "../../Images/watch_test.jpeg";
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 
+import img2 from "../../Images/0.jpg";
+import img3 from "../../Images/1.jpg";
+import img4 from "../../Images/2.jpg";
+import img5 from "../../Images/3.jpg";
+import img6 from "../../Images/6.jpg";
+import img7 from "../../Images/5.jpg";
+
 const Homescreen = styled.div`
   display: flex;
   align-items: center;
@@ -45,8 +52,8 @@ const StyledPaper = styled.div`
   color: black;
   margin: 40px;
   width: 12em;
-  height: 15em;
-  overflow: hidden;
+  height: 16em;
+  // overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,14 +89,14 @@ function LandingPage() {
       .then(() => markLoaded(true))
       .then(() => console.log(state));
     // console.log(state);
-  }, [loaded, state]);
+  }, []);
 
   console.log(state[0]);
 
   return (
     <Homescreen>
       <h1>Welcome</h1>
-      <span>{storedUser}</span>
+      {/* <span>{storedUser}</span> */}
       <StyledCarousel
         autoPlay="true"
         emulateTouch="true"
@@ -103,18 +110,18 @@ function LandingPage() {
           <img src={img1} />
         </div>
         <div>
-          <img src={img1} />
+          <img src={img2} />
         </div>
         <div>
-          <img src={img1} />
+          <img src={img3} />
         </div>
       </StyledCarousel>
       <FeaturedProducts>
         <StyledPaper>
-          <h3>{state[0]?.name}</h3>
+          <h3>Popcorn</h3>
           <img
             // src={require(`../../Images/${state[0]?.productID}.jpg`).default}
-            src={require(`../../Images/1.jpg`).default}
+            src={img4}
             max-width="10em"
             max-height="10em"
           />
@@ -124,10 +131,10 @@ function LandingPage() {
         </StyledPaper>
 
         <StyledPaper>
-          <h3>{state[1]?.name}</h3>
+          <h3>Diet Coke</h3>
           <img
             // src={require(`../../Images/${state[1]?.productID}.jpg`).default}
-            src={require(`../../Images/1.jpg`).default}
+            src={img5}
             max-width="10em"
             max-height="10em"
           />
@@ -137,10 +144,10 @@ function LandingPage() {
         </StyledPaper>
 
         <StyledPaper>
-          <h3>{state[2]?.name}</h3>
+          <h3>Snickers Bar</h3>
           <img
-            // src={require(`../../Images/${state[2]?.productID}.jpg`).default}
-            src={require(`../../Images/1.jpg`).default}
+            src={img6}
+            // src={require(`../../Images/2.jpg`).default}
             max-width="10em"
             max-height="10em"
           />

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import img1 from "../../Images/watch_test.jpeg";
+import img1 from "../../Images/2.jpg";
 
 const CartPage = styled.div`
   margin-top: 80px;
@@ -19,15 +19,16 @@ const StyledPaper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-content: center;
 
   img {
     max-height: 100px;
     width: auto;
   }
 
-  h3 {
+  p {
     text-align: center;
-    margin: 2px 0 30px 0;
+    margin: 2px;
   }
 
   button {
@@ -46,18 +47,12 @@ function Cart() {
       <h1>Shopping cart</h1>
       <StyledDiv>
         <StyledPaper>
-          <h3>Product 1</h3>
-          <img src={img1} max-width="10em" max-height="10em" />
-        </StyledPaper>
-        <StyledPaper>
-          <h3>Product 1</h3>
-          <img src={img1} max-width="10em" max-height="10em" />
-        </StyledPaper>
-        <StyledPaper>
-          <h3>Product 1</h3>
+          <p>Popcorn</p>
+          <p>$5</p>
           <img src={img1} max-width="10em" max-height="10em" />
         </StyledPaper>
       </StyledDiv>
+      <button onClick={() => alert("Cart Purchased")}>Checkout</button>
     </CartPage>
   );
 }
