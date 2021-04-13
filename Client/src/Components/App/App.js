@@ -91,7 +91,11 @@ function App() {
           <Route
             path="/product/:id"
             children={
-              <Product name="Test name" price="5" specification="lorem ipsum" />
+              <Product
+                name={Product.name}
+                price={Product.price}
+                description={Product.description}
+              />
             }
           ></Route>
           <Route path="/product">

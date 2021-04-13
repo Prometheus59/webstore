@@ -41,6 +41,34 @@ const StyledDiv = styled.div`
 `;
 
 function Cart() {
+  const [details, setDetails] = useState({ product: "" });
+  const [state, setState] = useState({});
+  const [loaded, markLoaded] = useState(false);
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/products`)
+      .then((res) => res.json())
+      .then((res) => setState(res))
+      .then(() => markLoaded(true))
+      .then(() => console.log(state));
+    console.log(state);
+  }, [loaded, state]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    fetch(
+      `/newOrder/:${details.product.amount}/:${details.product.orderCustomerID}/:${details.product.date}/:${details.product.productID}/:${details.product.invoiceAmount}`
+    )
+      .then((res) => res.json())
+      .then((res) => console.log(state));
+    alert(
+      ` CHECKOUT COMPLETE\n\n CART:\n ${localStorage.getItem(
+        "currItem"
+      )}\n\n SUBTOTAL: ${localStorage.getItem("currPrice")}`
+    );
+    window.location = "/LandingPage";
+  };
+
   return (
     <CartPage>
       <h1>Shopping cart</h1>
@@ -58,6 +86,9 @@ function Cart() {
           <img src={img1} max-width="10em" max-height="10em" />
         </StyledPaper>
       </StyledDiv>
+      <button type="submit" onClick={submitHandler}>
+        Checkout
+      </button>
     </CartPage>
   );
 }

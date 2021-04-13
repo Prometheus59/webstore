@@ -26,6 +26,15 @@ function ProductPage(props) {
 
   let { id } = useParams();
 
+  addToCart = () => {
+    fetch(`http://localhost:8080/product/${id}`)
+      .then((res) => res.json())
+      .then((res) => setState(res))
+      .then(() => markLoaded(true))
+      .then(() => console.log(state));
+    console.log(state);
+  };
+
   useEffect(() => {
     fetch(`http://localhost:8080/product/${id}`)
       .then((res) => res.json())
@@ -38,7 +47,6 @@ function ProductPage(props) {
   let name = state[0]?.name || "name";
   let price = state[0]?.price || "price";
   let quantity = state[0]?.price || "quantity";
-  // let description = state[0].description;
 
   console.log(id);
 
@@ -51,7 +59,7 @@ function ProductPage(props) {
         <h2>{name}</h2>
         <div>Price($): {price} </div>
         <p>Quantity Left: {quantity}</p>
-        {/* <div>Description - {description} </div> */}
+        <div>Description - {description} </div>
         <button>Add to cart</button>
       </div>
       <div id="related-products">{/* Implement carousel here */}</div>

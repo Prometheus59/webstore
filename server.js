@@ -2,9 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-var mysql = require("mysql2");
+let mysql = require("mysql2");
 // Connect to MySQL Database (already running) -> Use 'net start MySQL80' to start the server
-var connection = mysql.createPool({
+let connection = mysql.createPool({
   connectionLimit: 10,
   host: "127.0.0.1",
   user: "root",
@@ -16,16 +16,16 @@ var connection = mysql.createPool({
 const app = express();
 
 // Avoid Cross Origin Request errors
-var corsOptions = {
+let corsOptions = {
   origin: "http://localhost:3000",
 };
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
+// parse requests of json
 app.use(bodyParser.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
+// parse requests of content-type -www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route to test connection
@@ -95,6 +95,7 @@ app.get("/product/:id", async (req, res) => {
   });
 });
 
+// Get all products
 app.get("/products", async (req, res) => {
   // Connecting to the database.
   connection.getConnection(function (err, connection) {
@@ -118,6 +119,7 @@ app.get("/products", async (req, res) => {
   });
 });
 
+// Get a user from their id
 app.get("/user/:id", async (req, res) => {
   const { id } = req.params;
   connection.getConnection(function (err, connection) {
@@ -138,6 +140,103 @@ app.get("/user/:id", async (req, res) => {
       }
     );
     connection.release();
+  });
+});
+
+/*
+POST ROUTES
+*/
+
+// Add new customer
+app.post(
+  "/newCustomer/:username/:password/:firstName/:lastName/:address/:postal",
+  async (req, res) => {
+    let {
+      username,
+      password,
+      firstName,
+      lastName,
+      address,
+      postal,
+    } = req.params;
+    let userResp = [username, password, firstName, lastname, address, postal];
+    connection.getConnection(function (err, connection) {
+      connection.query(
+        "INSERT INTO customers ( username, password, firstName, lastName, address, postal ) VALUES ?",
+        [userResp],
+        function (err, result) {
+          if (!err) {
+            res.send(userResp);
+          } else {
+            throw err;
+          }
+        }
+      );
+    });
+  }
+);
+
+// Adding a new product
+app.post(
+  "/newProduct/:productName/:price/:stock/:category",
+  async (req, res) => {
+    let { pName, price, stock, category } = req.params;
+    let userResp = [pName, price, stock, category];
+    connection.getConnection(function (err, connection) {
+      connection.query(
+        "INSERT INTO products ( name, price, stock, categoryID ) VALUES ?",
+        [userResp],
+        function (err, result) {
+          if (!err) {
+            res.send(userResp);
+          } else {
+            throw err;
+          }
+        }
+      );
+    });
+  }
+);
+
+// Creating new order
+app.post(
+  "/newOrder/:amount/:orderCustomerID/:date/:productID/:invoiceAmount",
+  async (req, res) => {
+    let {
+      amount,
+      orderCustomerID,
+      date,
+      productID,
+      invoiceAmount,
+    } = req.params;
+    let userResp = [amount, orderCustomerID, date, productID, invoiceAmount];
+    connection.getConnection(function (err, connection) {
+      connection.query(
+        "INSERT INTO orders ( amount, orderCustomerID, date, productID, invoiceAmount ) VALUES ?",
+        [userResp],
+        function (err, result) {
+          if (!err) {
+            res.send(userResp);
+          } else {
+            throw err;
+          }
+        }
+      );
+    });
+  }
+);
+
+// Fetching all orders
+app.get("/orders", async () => {
+  connection.getConnection(function (err, connection) {
+    if (err) {
+      connection.release();
+      return res.send(400, "Couldn't get a connection");
+    }
+    connection.query("SELECT * FROM orders", function (error, results) {
+      if (error) throw error;
+      res.send(results);
+    });
   });
 });
 

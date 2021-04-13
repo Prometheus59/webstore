@@ -126,8 +126,7 @@ function LandingPage() {
         <StyledPaper>
           <h3>{state[1]?.name}</h3>
           <img
-            // src={require(`../../Images/${state[1]?.productID}.jpg`).default}
-            src={require(`../../Images/1.jpg`).default}
+            src={require(`../../Images/${state[1]?.productID}.jpg`).default}
             max-width="10em"
             max-height="10em"
           />
@@ -139,8 +138,7 @@ function LandingPage() {
         <StyledPaper>
           <h3>{state[2]?.name}</h3>
           <img
-            // src={require(`../../Images/${state[2]?.productID}.jpg`).default}
-            src={require(`../../Images/1.jpg`).default}
+            src={require(`../../Images/${state[2]?.productID}.jpg`).default}
             max-width="10em"
             max-height="10em"
           />
