@@ -96,7 +96,7 @@ function LandingPage() {
   return (
     <Homescreen>
       <h1>Welcome</h1>
-      {/* <span>{storedUser}</span> */}
+      <span>{"shan"}</span>
       <StyledCarousel
         autoPlay="true"
         emulateTouch="true"
