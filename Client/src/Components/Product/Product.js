@@ -26,7 +26,7 @@ function ProductPage(props) {
 
   let { id } = useParams();
 
-  addToCart = () => {
+  const addToCart = () => {
     fetch(`http://localhost:8080/product/${id}`)
       .then((res) => res.json())
       .then((res) => setState(res))
@@ -46,8 +46,8 @@ function ProductPage(props) {
 
   let name = state[0]?.name || "name";
   let price = state[0]?.price || "price";
-  let quantity = state[0]?.price || "quantity";
-
+  let quantity = state[0]?.quantity || "quantity";
+  let description = state[0]?.description || "description";
   console.log(id);
 
   return (
@@ -60,7 +60,7 @@ function ProductPage(props) {
         <div>Price($): {price} </div>
         <p>Quantity Left: {quantity}</p>
         <div>Description - {description} </div>
-        <button>Add to cart</button>
+        <button onClick={addToCart()}>Add to cart</button>
       </div>
       <div id="related-products">{/* Implement carousel here */}</div>
     </ProductPageStyle>

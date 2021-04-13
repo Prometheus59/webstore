@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import img1 from "../../Images/watch_test.jpeg";
 
 const CartPage = styled.div`
